@@ -25,12 +25,12 @@
 
                     <div class="row g-3">
                         <div class="col-md-6">
-                            <label class="form-label fw-medium text-secondary">Name</label>
+                            <label class="form-label fw-medium text-secondary">Name <small class="text-danger fw-bold">*</small></label>
                             <input type="text" name="name" value="{{ old('name', $application->name) }}" class="form-control form-control-lg" required>
                         </div>
 
                         <div class="col-md-6">
-                            <label class="form-label fw-medium text-secondary">Phone</label>
+                            <label class="form-label fw-medium text-secondary">Phone <small class="text-danger fw-bold">*</small></label>
                             <input type="text" name="phone" value="{{ old('phone', $application->phone) }}" class="form-control form-control-lg" required>
                         </div>
 
@@ -76,7 +76,7 @@
 
                     <div class="row g-3">
                         <div class="col-md-6">
-                            <label class="form-label fw-medium text-secondary">Select Job</label>
+                            <label class="form-label fw-medium text-secondary">Select Job <small class="text-danger fw-bold">*</small></label>
                             <select name="job_id" class="form-select form-select-lg">
                                 @foreach ($jobs as $job)
                                     <option value="{{ $job->id }}" {{ $application->job_id == $job->id ? 'selected' : '' }}>
@@ -85,6 +85,14 @@
                                 @endforeach
                             </select>
                         </div>
+                         <div class="col-md-6">
+                             <label class="form-label fw-medium text-secondary">Payment </label>
+                            <select name="payment" class="form-select form-select-lg">
+                                <option value="1">Yes</option>
+                                <option value="0">No</option>
+                            </select>
+                        </div>
+
                     </div>
 
                     <hr class="my-5">
@@ -97,7 +105,7 @@
 
                     <div class="row g-3">
                         <div class="col-md-6">
-                            <label class="form-label fw-medium text-secondary">Passport No</label>
+                            <label class="form-label fw-medium text-secondary">Passport No <small class="text-danger fw-bold">*</small></label>
                             <input type="text" name="passport_no" value="{{ old('passport_no', $application->passport_no) }}" class="form-control form-control-lg">
                         </div>
 

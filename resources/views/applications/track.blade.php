@@ -63,9 +63,9 @@
                                 <span class="bg-white border-0 input-group-text">
                                     <i class="bi bi-search text-primary"></i>
                                 </span>
-                                <input type="text" name="phone" class="border-0 form-control"
-                                       placeholder="Enter Phone Number (e.g. 013307.....)"
-                                       value="{{ request('phone') }}" required>
+                                <input type="text" name="passport_no" class="border-0 form-control"
+                                       placeholder="Enter Passport Number (e.g. A12850583)"
+                                       value="{{ request('passport_no') }}" required>
                                 <button class="px-4 btn btn-primary" type="submit">
                                     Search
                                 </button>

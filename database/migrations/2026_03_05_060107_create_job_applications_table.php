@@ -26,6 +26,7 @@ return new class extends Migration
         $table->boolean('english_certificate')->default(0);
         $table->integer('experience_year')->nullable();
         $table->string('video_link')->nullable();
+        $table->boolean('payment')->default(0);
         $table->text('photo')->nullable();
         $table->integer('created_by')->nullable();
         $table->tinyInteger('status')->default(1);

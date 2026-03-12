@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Job;
 use App\Models\JobApplication;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class JobApplicationController extends Controller
 {
@@ -28,21 +29,26 @@ class JobApplicationController extends Controller
         return view('applications.apply', compact('jobs'));
     }
 
-    // 3. Store data
+
     public function store(Request $request)
-    {
-        $request->validate([
-            'job_id' => 'required|exists:jobs,id',
-            'name' => 'required|string|max:255',
-            'phone' => 'required|string|max:20',
-            'email' => 'nullable|email',
-            'photo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-            'date_of_birth' => 'nullable|date',
-        ]);
+{
+
+
+
+    $request->validate([
+        'job_id' => 'required|exists:jobs,id',
+        'name' => 'required|string|max:255',
+        'phone' => 'required|string|max:20',
+        'passport_no' => 'required|string|max:20',
+        'email' => 'nullable|email',
+        'photo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+        'date_of_birth' => 'nullable|date',
+    ]);
+
+    try {
 
         $data = $request->except('photo');
 
-        // Photo Upload
         if ($request->hasFile('photo')) {
             $file = $request->file('photo');
             $filename = time() . '.' . $file->getClientOriginalExtension();
@@ -50,17 +56,17 @@ class JobApplicationController extends Controller
             $data['photo'] = 'uploads/applications/' . $filename;
         }
 
-        // Default Status
         $data['status'] = $request->has('status') ? 1 : 0;
-
-        // Created By (If Authenticated)
         $data['created_by'] = auth()->id();
-
         JobApplication::create($data);
-
         return redirect()->route('applications.index')->with('success', 'Application submitted successfully.');
-    }
 
+    } catch (\Exception $e) {
+
+        return redirect()->back()->with('error', 'Something went wrong! Please try again. Error: ' . $e->getMessage());
+         Log::error($e->getMessage());
+    }
+}
     public function frontendStore(Request $request)
     {
         $request->validate([
@@ -110,6 +116,7 @@ class JobApplicationController extends Controller
             'job_id' => 'required|exists:jobs,id',
             'name' => 'required|string|max:255',
             'phone' => 'required|string|max:20',
+            'passport_no' => 'required|string|max:20',
             'photo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
@@ -157,7 +164,7 @@ class JobApplicationController extends Controller
    public function trackSearch(Request $request)
 {
     $request->validate([
-        'phone' => 'required|string'
+        'passport_no' => 'required|string'
     ]);
 
     $searchPhone = preg_replace('/[^0-9]/', '', $request->phone);

@@ -25,13 +25,13 @@
 
                     <div class="row g-3">
                         <div class="col-md-6">
-                            <label class="form-label fw-medium text-secondary">Name</label>
+                            <label class="form-label fw-medium text-secondary">Name <small class="text-danger fw-bold">*</small></label>
                             <input type="text" name="name" class="form-control form-control-lg" placeholder="Full Name" required>
                         </div>
 
                         <div class="col-md-6">
-                            <label class="form-label fw-medium text-secondary">Phone</label>
-                            <input type="text" name="phone" class="form-control form-control-lg" placeholder="+880 1XXX-XXXXXX" required>
+                            <label class="form-label fw-medium text-secondary">Phone <small class="text-danger fw-bold">*</small></label>
+                            <input type="number" name="phone" class="form-control form-control-lg" placeholder="+880 1XXX-XXXXXX" required>
                         </div>
 
                         <div class="col-md-6">
@@ -73,13 +73,20 @@
 
                     <div class="row g-3">
                         <div class="col-md-6">
-                            <label class="form-label fw-medium text-secondary">Select Job</label>
+                            <label class="form-label fw-medium text-secondary">Select Job <small class="text-danger fw-bold">*</small></label>
                             <select name="job_id" class="form-select form-select-lg">
                                 @foreach ($jobs as $job)
                                     <option value="{{ $job->id }}">
                                         {{ $job->title }}
                                     </option>
                                 @endforeach
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                             <label class="form-label fw-medium text-secondary">Payment </label>
+                            <select name="payment" class="form-select form-select-lg">
+                                <option value="1">Yes</option>
+                                <option value="0">No</option>
                             </select>
                         </div>
                     </div>
@@ -94,8 +101,8 @@
 
                     <div class="row g-3">
                         <div class="col-md-6">
-                            <label class="form-label fw-medium text-secondary">Passport No</label>
-                            <input type="text" name="passport_no" class="form-control form-control-lg" placeholder="Passport Number">
+                            <label class="form-label fw-medium text-secondary">Passport No <small class="text-danger fw-bold">*</small></label>
+                            <input type="number" name="passport_no" class="form-control form-control-lg" placeholder="Passport Number">
                         </div>
 
                         <div class="col-md-6">

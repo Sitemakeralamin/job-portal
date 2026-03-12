@@ -18,6 +18,7 @@ class JobApplication extends Model
         'date_of_birth',
         'address',
         'passport_no',
+        'payment',
         'nationality',
         'current_country',
         'english_certificate',
