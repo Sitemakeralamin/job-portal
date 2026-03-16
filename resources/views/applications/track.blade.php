@@ -55,7 +55,7 @@
                 <div class="p-4 mb-5 card search-card">
                     <div class="text-center card-body">
                         <h3 class="mb-3 text-dark">Track Your Application</h3>
-                        <p class="mb-4 text-muted">Enter your phone number to check the current status of your application.</p>
+                        <p class="mb-4 text-muted">Enter your Passport number to check the current status of your application.</p>
 
                         <form action="{{ route('applications.track.search') }}" method="POST">
                             @csrf
@@ -111,9 +111,9 @@
                                             $status_class = 'bg-secondary';
                                             $status_text = 'Pending';
 
-                                            if($app->status == 1) { $status_class = 'bg-warning text-dark'; $status_text = 'Pending'; }
-                                            if($app->status == 2) { $status_class = 'bg-success'; $status_text = 'ACCEPTED'; }
-                                            if($app->status == 3) { $status_class = 'bg-danger'; $status_text = 'Rejected'; }
+                                            if($app->status == 0) { $status_class = 'bg-warning text-dark'; $status_text = 'Pending'; }
+                                            if($app->status == 1) { $status_class = 'bg-success'; $status_text = 'ACCEPTED'; }
+                                            if($app->status == 2) { $status_class = 'bg-danger'; $status_text = 'Rejected'; }
                                         @endphp
 
                                         <span class="badge status-badge {{ $status_class }}">
@@ -123,9 +123,14 @@
                                         <small class="mt-2 text-muted d-block">
                                             ID: #{{ $app->id }}
                                         </small>
-                                        <a href="{{ route('applications.print', $app->id) }}" target="_blank" class="mt-2 btn btn-sm btn-outline-dark">
-                                        <i class="bi bi-printer me-1"></i> Print
-                                    </a>
+                                        @if ($app->payment == 1)
+                                             <a href="{{ route('applications.print', $app->id) }}" target="_blank" class="mt-2 btn btn-sm btn-outline-dark">
+                                                <i class="bi bi-printer me-1"></i> Print
+                                            </a>
+                                        @else
+                                        <span>Not Paid</span>
+                                        @endif
+
                                     </div>
                                 </div>
 

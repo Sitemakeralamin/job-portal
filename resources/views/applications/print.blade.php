@@ -10,12 +10,40 @@
         .header h2 { margin: 0; text-transform: uppercase; }
         .header p { margin: 5px 0 0; color: #666; }
 
-        .profile-area { display: flex; gap: 20px; margin-bottom: 30px; }
-        .photo { width: 150px; height: 150px; border: 1px solid #ccc; padding: 2px; }
+        /* Profile Area Flex Layout */
+        .profile-area {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+            align-items: flex-start; /* উপরে সমান রাখতে */
+        }
+
+        .photo { width: 150px; height: 150px; border: 1px solid #ccc; padding: 2px; flex-shrink: 0; }
         .photo img { width: 100%; height: 100%; object-fit: cover; }
+
         .info { flex: 1; }
         .info h3 { margin: 0 0 10px; color: #000; }
         .info p { margin: 5px 0; font-size: 14px; }
+
+        /* QR Code Styles */
+        .qr-code {
+            width: 110px;
+            height: 110px;
+            border: 1px solid #ccc;
+            padding: 5px;
+            text-align: center;
+            background: #fff;
+            flex-shrink: 0; /* সাইজ ছোট বড় না হোক */
+        }
+        .qr-code img {
+            width: 100%;
+            height: 100%;
+        }
+        .qr-code p {
+            font-size: 10px;
+            margin: 2px 0 0 0;
+            color: #666;
+        }
 
         .section-title { background: #f4f4f4; padding: 8px; font-weight: bold; margin-top: 20px; border-left: 4px solid #333; }
         table { width: 100%; border-collapse: collapse; margin-top: 10px; }
@@ -47,15 +75,29 @@
                     <img src="https://via.placeholder.com/150" alt="No Photo">
                 @endif
             </div>
+
             <div class="info">
                 <h3>{{ $application->name }}</h3>
                 <p><strong>Applied For:</strong> {{ $application->job->title ?? 'N/A' }}</p>
                 <p><strong>Status:</strong>
-                    <span class="status-badge status-{{ $application->status == 2 ? 'accepted' : ($application->status == 3 ? 'rejected' : 'pending') }}">
-                        {{ $application->status == 2 ? 'Accepted' : ($application->status == 3 ? 'Rejected' : 'Pending') }}
+                    <span class="status-badge status-{{ $application->status == 1 ? 'accepted' : ($application->status == 2 ? 'rejected' : 'pending') }}">
+                        {{ $application->status == 1 ? 'Accepted' : ($application->status == 2 ? 'Rejected' : 'Pending') }}
                     </span>
                 </p>
             </div>
+
+            <!-- QR Code Section Starts -->
+            <div class="qr-code">
+                @php
+                    // QR কোডের জন্য ডাটা প্রস্তুত করা হলো
+                    $qrData = "Name: " . $application->name .
+                              ", Phone: " . $application->phone .
+                              ", Passport: " . ($application->passport_no ?? 'N/A');
+                @endphp
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data={{ urlencode($qrData) }}" alt="QR Code">
+                <p>Scan for Info</p>
+            </div>
+            <!-- QR Code Section Ends -->
         </div>
 
         <div class="section-title">Personal Information</div>
