@@ -73,6 +73,7 @@ class JobApplicationController extends Controller
             'job_id' => 'required|exists:jobs,id',
             'name' => 'required|string|max:255',
             'phone' => 'required|string|max:20',
+            'passport_no' => 'required|string|max:20',
             'email' => 'nullable|email',
             'photo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'date_of_birth' => 'nullable|date',

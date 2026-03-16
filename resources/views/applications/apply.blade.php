@@ -20,7 +20,7 @@
 <body>
 
     {{-- Navbar --}}
-    <nav class="navbar navbar-expand-lg navbar-light navbar-custom sticky-top">
+    {{-- <nav class="navbar navbar-expand-lg navbar-light navbar-custom sticky-top">
         <div class="container">
             <a class="navbar-brand fw-bold text-primary" href="{{ url('/') }}">
                 <i class="bi bi-airplane-engines-fill me-2"></i>BritFly Jobs
@@ -36,7 +36,7 @@
                 @endauth
             </div>
         </div>
-    </nav>
+    </nav> --}}
 
     {{-- Main Content --}}
     <div class="container py-5">
@@ -52,7 +52,7 @@
 
                 {{-- Page Header --}}
                 <div class="mb-4 text-center">
-                    <h2 class="fw-bold text-dark">New Job Application</h2>
+                    <h2 class="fw-bold text-dark">New Visa Application</h2>
                     <p class="text-muted">Fill up the form carefully with correct information.</p>
                 </div>
 
@@ -123,6 +123,13 @@
                                         @foreach ($jobs as $job)
                                             <option value="{{ $job->id }}">{{ $job->title }}</option>
                                         @endforeach
+                                    </select>
+                                </div>
+                                 <div class="col-md-6">
+                                    <label class="form-label fw-medium text-secondary">Payment </label>
+                                    <select name="payment" class="form-select form-select-lg">
+                                        <option value="1">Yes</option>
+                                        <option value="0">No</option>
                                     </select>
                                 </div>
                             </div>
