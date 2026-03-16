@@ -123,9 +123,9 @@
             <tr><td>Video Link</td><td>{{ $application->video_link ?? 'N/A' }}</td></tr>
         </table>
 
-        <div class="footer">
+        {{-- <div class="footer">
             &copy; {{ date('Y') }} BritFly Jobs. All Rights Reserved.
-        </div>
+        </div> --}}
     </div>
 
     <script>
