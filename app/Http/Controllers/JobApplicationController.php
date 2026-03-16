@@ -167,25 +167,10 @@ class JobApplicationController extends Controller
         'passport_no' => 'required|string'
     ]);
 
-    $searchPhone = preg_replace('/[^0-9]/', '', $request->phone);
-    $possibleNumbers = [];
-    $possibleNumbers[] = $searchPhone;
-    if (str_starts_with($searchPhone, '0')) {
-        $possibleNumbers[] = '880' . substr($searchPhone, 1);
-    }
-    if (str_starts_with($searchPhone, '880')) {
-
-        $possibleNumbers[] = '0' . substr($searchPhone, 3);
-    }
-
+    $searchPassport_no = preg_replace('/[^0-9]/', '', $request->passport_no);
 
     $applications = JobApplication::with('job')
-        ->where(function ($query) use ($possibleNumbers, $searchPhone) {
-            foreach ($possibleNumbers as $number) {
-                $query->orWhere('phone', $number);
-            }
-            $query->orWhere('phone', 'LIKE', '%' . $searchPhone);
-        })
+        ->where('passport_no', 'LIKE', '%' . $searchPassport_no)
         ->latest()
         ->get();
 
